@@ -13,6 +13,10 @@ const HeaderWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0 30px;
+
+  a {
+    margin: 0 10px;
+  }
 `
 
 const Logo = styled.img`
@@ -29,10 +33,10 @@ export const Header: React.FC = () => {
     <HeaderWrapper>
       <Logo src={logoDark} alt="title" onClick={() => navigate('/')} />
       <div>
-        <LinkComponent to="/">Home</LinkComponent>
-        <LinkComponent to="freelances">Freelances</LinkComponent>
+        <LinkComponent to="/">Accueil</LinkComponent>
+        <LinkComponent to="freelances">Profils</LinkComponent>
         <LinkComponent to="survey" $isFullLink>
-          Questionnaire
+          Faire le test
         </LinkComponent>
       </div>
     </HeaderWrapper>

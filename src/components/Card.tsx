@@ -11,7 +11,8 @@ const CardWrapper = styled.div`
   padding: 25px;
   background-color: ${colors.backgroundLight};
   border-radius: 30px;
-  width: 350px;
+  width: 300px;
+  height: 300px;
   transition: 200ms;
   justify-content: space-between;
 
@@ -21,8 +22,8 @@ const CardWrapper = styled.div`
   }
 
   img {
-    height: 130px;
-    width: 130px;
+    height: 150px;
+    width: 150px;
     border-radius: 50%;
     margin: auto;
   }
