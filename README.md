@@ -1,4 +1,4 @@
-# Shopping Project 
+# React Shiny Agency
 
 ### `npm run dev`
 
