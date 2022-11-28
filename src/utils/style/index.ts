@@ -1,3 +1,3 @@
 export { default as colors } from './colors'
-export { Loader } from './Atoms'
+export { Loader, StyledLink } from './Atoms'
 export { GlobalStyle } from './GlobalStyle'

@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import logoDark from '@/assets/logo_dark.png'
 import logoLight from '@/assets/logo_light.png'
 import { LinkComponent } from './LinkComponent'
-import { Theme, useThemeContext } from '@/context'
+import { Theme, useThemeContext } from '@/contexts'
 
 const HeaderWrapper = styled.div`
   height: 100px;

@@ -1,13 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { colors, Loader } from '@/utils/style'
-import { Theme, useSurveyContext, useThemeContext } from '@/context'
+import { Theme, useSurveyContext, useThemeContext } from '@/contexts'
+import { useFetch } from '@/hooks'
 
 const SurveyContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  p {
+    color: ${({ theme }) => (theme === Theme.LIGHT ? '#000' : '#fff')};
+  }
 `
 
 const QuestionTitle = styled.h2`
@@ -70,9 +75,11 @@ export const Survey: React.FC = () => {
 
   const questionNumberInt = parseInt(questionNumber || '1', 10)
 
-  const [questions, setQuestions] = useState<Record<string, string>>({})
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<boolean>(false)
+  const { data, isError, isLoading } = useFetch<{
+    surveyData: Record<string, string>
+  }>('http://localhost:8000/survey')
+
+  const questions = useMemo(() => data?.surveyData || {}, [data?.surveyData])
 
   const { theme } = useThemeContext()
   const { saveAnswers, answers } = useSurveyContext()
@@ -84,44 +91,20 @@ export const Survey: React.FC = () => {
   }
 
   useEffect(() => {
-    const controller = new AbortController()
-
-    const getQuestions = async () => {
-      try {
-        const response = await fetch('http://localhost:8000/survey', {
-          signal: controller.signal
-        })
-        const { surveyData } = await response.json()
-
-        setQuestions(surveyData)
-      } catch (err) {
-        setError(true)
-        if (err instanceof Error) console.error(err.message)
-      } finally {
-        setLoading(false)
-      }
-    }
-    getQuestions()
-
-    return () => {
-      controller.abort()
-    }
-  }, [])
-
-  useEffect(() => {
     if (Number.isNaN(questionNumberInt)) navigate(`/404`)
   }, [navigate, questionNumberInt])
 
   useEffect(() => {
-    if (!loading && !error && !questions[questionNumberInt]) navigate(`/404`)
-  }, [error, loading, navigate, questionNumberInt, questions])
+    if (!isLoading && !isError && !questions[questionNumberInt])
+      navigate(`/404`)
+  }, [isError, isLoading, navigate, questionNumberInt, questions])
 
   return (
-    <SurveyContainer>
+    <SurveyContainer theme={theme}>
       <QuestionTitle theme={theme}>Question {questionNumberInt}</QuestionTitle>
-      {loading ? (
+      {isLoading ? (
         <Loader />
-      ) : error ? (
+      ) : isError ? (
         <p>Il semblerait qu’il y ait un problème</p>
       ) : (
         <>

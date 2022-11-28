@@ -1,4 +1,4 @@
-import { Theme, useThemeContext } from '@/context'
+import { Theme, useThemeContext } from '@/contexts'
 import { createGlobalStyle } from 'styled-components'
 
 const StyledGlobalStyle = createGlobalStyle<{ isDarkMode: boolean }>`

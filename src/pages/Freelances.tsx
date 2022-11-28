@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { Card } from '@/components'
 import { colors, Loader } from '@/utils/style'
-import { Theme, useThemeContext } from '@/context'
+import { Theme, useThemeContext } from '@/contexts'
+import { useFetch } from '@/hooks'
 
 interface IFreelance {
   id: string
@@ -36,31 +37,13 @@ const CardsContainer = styled.div`
 `
 
 export const Freelances: React.FC = () => {
-  const [freelances, setFreelances] = useState<IFreelance[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(false)
+  const { data, isError, isLoading } = useFetch<{
+    freelancersList: IFreelance[]
+  }>('http://localhost:8000/freelances')
+
+  const freelances = data?.freelancersList || []
 
   const { theme } = useThemeContext()
-
-  const getFreelances = async () => {
-    try {
-      const res = await fetch('http://localhost:8000/freelances')
-      const { freelancersList } = await res.json()
-
-      setFreelances(freelancersList)
-    } catch (err) {
-      setError(true)
-      if (err instanceof Error) {
-        console.error(err.message)
-      }
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  useEffect(() => {
-    getFreelances()
-  }, [])
 
   return (
     <FreelancesWrapper>
@@ -68,9 +51,9 @@ export const Freelances: React.FC = () => {
         <h1>Trouvez votre prestataire</h1>
         <p>Chez Shiny nous réunissons les meilleurs profils pour vous.</p>
       </StyledTitle>
-      {loading ? (
+      {isLoading ? (
         <Loader />
-      ) : error ? (
+      ) : isError ? (
         <p>Il semblerait qu’il y ait un problème</p>
       ) : (
         <CardsContainer>

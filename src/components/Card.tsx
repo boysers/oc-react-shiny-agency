@@ -2,7 +2,7 @@ import React from 'react'
 import DefaultPicture from '@/assets/profile.png'
 import styled from 'styled-components'
 import { colors } from '@/utils/style'
-import { Theme, useThemeContext } from '@/context'
+import { Theme, useThemeContext } from '@/contexts'
 
 type CardType = { jobTitle: string; name: string; picture: string }
 

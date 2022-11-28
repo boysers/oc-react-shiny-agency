@@ -1,4 +1,4 @@
-import { Theme, useThemeContext } from '@/context'
+import { Theme, useThemeContext } from '@/contexts'
 import { colors } from '@/utils/style'
 import React from 'react'
 import { Link, To } from 'react-router-dom'

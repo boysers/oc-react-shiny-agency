@@ -3,7 +3,7 @@ import { LinkComponent } from '@/components'
 import illustration from '@/assets/illustration.png'
 import styled from 'styled-components'
 import { colors } from '@/utils/style'
-import { Theme, useThemeContext } from '@/context'
+import { Theme, useThemeContext } from '@/contexts'
 
 const HomeWrapper = styled.div`
   margin: 30px;

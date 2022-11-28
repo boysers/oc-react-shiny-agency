@@ -2,7 +2,7 @@ import React from 'react'
 import image404 from '@/assets/404.svg'
 import styled from 'styled-components'
 import { colors } from '@/utils/style'
-import { useThemeContext } from '@/context'
+import { useThemeContext } from '@/contexts'
 
 const ErrorWrapper = styled.div`
   display: flex;

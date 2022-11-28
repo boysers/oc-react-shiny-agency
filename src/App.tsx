@@ -2,8 +2,8 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import styled from 'styled-components'
 import { Header, Footer } from '@/components'
-import { ThemeProvider, SurveyProvider } from '@/context'
-import { GlobalStyle } from './utils/style'
+import { ThemeProvider, SurveyProvider } from '@/contexts'
+import { GlobalStyle } from '@/utils/style'
 
 const MainWrapper = styled.main`
   max-width: 1200px;
