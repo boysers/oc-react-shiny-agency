@@ -2,6 +2,7 @@ import React from 'react'
 import DefaultPicture from '@/assets/profile.png'
 import styled from 'styled-components'
 import { colors } from '@/utils/style'
+import { Theme, useThemeContext } from '@/context'
 
 type CardType = { jobTitle: string; name: string; picture: string }
 
@@ -9,7 +10,8 @@ const CardWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 25px;
-  background-color: ${colors.backgroundLight};
+  background-color: ${({ theme }) =>
+    theme === 'light' ? colors.backgroundLight : colors.backgroundDark};
   border-radius: 30px;
   width: 300px;
   height: 300px;
@@ -29,7 +31,9 @@ const CardWrapper = styled.div`
   }
 
   span:first-child {
-    color: #5843e4;
+    /* color: #5843e4; */
+    color: ${({ theme }) =>
+      theme === Theme.LIGHT ? colors.primary : '#ffffff'};
     font-size: 22px;
     font-weight: bold;
   }
@@ -38,6 +42,7 @@ const CardWrapper = styled.div`
     text-align: center;
     font-size: 1.4rem;
     padding-bottom: 16px;
+    color: ${({ theme }) => (theme === 'light' ? '#000000' : '#ffffff')};
   }
 `
 
@@ -46,8 +51,10 @@ export const Card: React.FC<CardType> = ({
   name: title,
   picture = DefaultPicture
 }) => {
+  const { theme } = useThemeContext()
+
   return (
-    <CardWrapper>
+    <CardWrapper theme={theme}>
       <span>{label}</span>
       <img src={picture} alt="freelance" />
       <span>{title}</span>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Card } from '@/components'
 import { colors, Loader } from '@/utils/style'
+import { Theme, useThemeContext } from '@/context'
 
 interface IFreelance {
   id: string
@@ -20,9 +21,11 @@ const FreelancesWrapper = styled.div`
 const StyledTitle = styled.div`
   text-align: center;
   margin: 20px 0;
+  color: ${({ theme }) => (theme === Theme.LIGHT ? '#000000' : '#ffffff')};
 
   p {
-    color: ${colors.secondary};
+    color: ${({ theme }) =>
+      theme === Theme.LIGHT ? colors.secondary : '#ffffff'};
   }
 `
 
@@ -36,6 +39,8 @@ export const Freelances: React.FC = () => {
   const [freelances, setFreelances] = useState<IFreelance[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
+
+  const { theme } = useThemeContext()
 
   const getFreelances = async () => {
     try {
@@ -59,7 +64,7 @@ export const Freelances: React.FC = () => {
 
   return (
     <FreelancesWrapper>
-      <StyledTitle>
+      <StyledTitle theme={theme}>
         <h1>Trouvez votre prestataire</h1>
         <p>Chez Shiny nous réunissons les meilleurs profils pour vous.</p>
       </StyledTitle>

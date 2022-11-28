@@ -3,13 +3,15 @@ import { LinkComponent } from '@/components'
 import illustration from '@/assets/illustration.png'
 import styled from 'styled-components'
 import { colors } from '@/utils/style'
+import { Theme, useThemeContext } from '@/context'
 
 const HomeWrapper = styled.div`
-  margin: 80px 0;
+  margin: 30px;
 `
 
 const StyledHeader = styled.div`
-  background-color: ${colors.backgroundLight};
+  background-color: ${({ theme }) =>
+    theme === Theme.LIGHT ? colors.backgroundLight : colors.backgroundDark};
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -19,6 +21,7 @@ const StyledHeader = styled.div`
 
   h1 {
     line-height: 2em;
+    color: ${({ theme }) => (theme === 'light' ? '#000000' : '#ffffff')};
   }
 
   img {
@@ -37,9 +40,11 @@ const StyledHeader = styled.div`
 `
 
 export const Home: React.FC = () => {
+  const { theme } = useThemeContext()
+
   return (
     <HomeWrapper>
-      <StyledHeader>
+      <StyledHeader theme={theme}>
         <div>
           <h1>
             Repérez vos besoins, on s’occupe du reste, avec les meilleurs

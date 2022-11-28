@@ -1,3 +1,4 @@
+import { Theme, useThemeContext } from '@/context'
 import { colors } from '@/utils/style'
 import React from 'react'
 import { Link, To } from 'react-router-dom'
@@ -9,7 +10,7 @@ type LinkComponentProps = React.PropsWithChildren<{ to: To } & StyledLinkProps>
 
 const StyledLink = styled(Link)<StyledLinkProps>`
   padding: 15px;
-  color: #8186a0;
+  color: ${({ theme }) => (theme === Theme.LIGHT ? '#8186a0' : '#fff')};
   text-decoration: none;
   font-size: 18px;
   ${(props) =>
@@ -22,8 +23,10 @@ export const LinkComponent: React.FC<LinkComponentProps> = ({
   $isFullLink,
   children
 }) => {
+  const { theme } = useThemeContext()
+
   return (
-    <StyledLink to={to} $isFullLink={$isFullLink}>
+    <StyledLink to={to} $isFullLink={$isFullLink} theme={theme}>
       {children}
     </StyledLink>
   )

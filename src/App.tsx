@@ -1,13 +1,9 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import styled, { createGlobalStyle } from 'styled-components'
-import { Header } from '@/components'
-
-const GlobalStyle = createGlobalStyle`
-    div {
-        font-family: 'Trebuchet MS', Helvetica, sans-serif;
-    }
-`
+import styled from 'styled-components'
+import { Header, Footer } from '@/components'
+import { ThemeProvider, SurveyProvider } from '@/context'
+import { GlobalStyle } from './utils/style'
 
 const MainWrapper = styled.main`
   max-width: 1200px;
@@ -17,11 +13,16 @@ const MainWrapper = styled.main`
 export const App: React.FC = () => {
   return (
     <>
-      <GlobalStyle />
-      <Header />
-      <MainWrapper>
-        <Outlet />
-      </MainWrapper>
+      <ThemeProvider>
+        <SurveyProvider>
+          <GlobalStyle />
+          <Header />
+          <MainWrapper>
+            <Outlet />
+          </MainWrapper>
+          <Footer />
+        </SurveyProvider>
+      </ThemeProvider>
     </>
   )
 }
