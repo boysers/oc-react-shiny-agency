@@ -39,6 +39,10 @@ const StyledHeader = styled.div`
   }
 `
 
+export function sum(a: number, b: number): number {
+  return a + b
+}
+
 export const Home: React.FC = () => {
   const { theme } = useThemeContext()
 

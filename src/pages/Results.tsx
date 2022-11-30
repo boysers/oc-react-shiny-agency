@@ -64,7 +64,7 @@ const StyledError = styled.p`
   font-size: 1.2em;
 `
 
-const formatQueryParams = (answers: Record<string, boolean>): string => {
+export const formatQueryParams = (answers: Record<string, boolean>): string => {
   const answerNumbers = Object.keys(answers)
 
   return answerNumbers.reduce((previousParams, answerNumber, index) => {
@@ -72,6 +72,17 @@ const formatQueryParams = (answers: Record<string, boolean>): string => {
     const separator = isFirstAnswer ? '' : '&'
     return `${previousParams}${separator}a${answerNumber}=${answers[answerNumber]}`
   }, '')
+}
+
+export function formatJobList(
+  title: string,
+  listLength: number,
+  index: number
+): string {
+  if (index === listLength - 1) {
+    return title
+  }
+  return `${title},`
 }
 
 export const Results: React.FC = () => {
@@ -109,8 +120,7 @@ export const Results: React.FC = () => {
                 key={`result-title-${index}-${result.title}`}
                 theme={theme}
               >
-                {result.title}
-                {index === resultsData.length - 1 ? '' : ','}
+                {formatJobList(result.title, resultsData.length, index)}
               </JobTitle>
             ))}
           </>
