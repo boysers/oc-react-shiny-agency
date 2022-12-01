@@ -97,8 +97,6 @@ export const Results: React.FC = () => {
 
   const resultsData = data?.resultsData || []
 
-  console.log(resultsData)
-
   if (isError) {
     return <StyledError theme={theme}>Il y a un problème</StyledError>
   }

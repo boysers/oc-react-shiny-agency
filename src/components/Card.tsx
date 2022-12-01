@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import DefaultPicture from '@/assets/profile.png'
 import styled from 'styled-components'
 import { colors } from '@/utils/style'
 import { Theme, useThemeContext } from '@/contexts'
 
-type CardType = { jobTitle: string; name: string; picture: string }
+type CardType = { jobTitle: string; name: string; picture?: string }
 
 const CardWrapper = styled.div`
   display: flex;
@@ -52,12 +52,22 @@ export const Card: React.FC<CardType> = ({
   picture = DefaultPicture
 }) => {
   const { theme } = useThemeContext()
+  const [isFavorite, setIsFavorite] = useState(false)
+  const star = isFavorite ? '⭐️' : ''
 
   return (
-    <CardWrapper theme={theme}>
-      <span>{label}</span>
+    <CardWrapper
+      data-testid="card"
+      theme={theme}
+      onClick={() => {
+        setIsFavorite((prev) => !prev)
+      }}
+    >
+      <span data-testid="jobTitle">{label}</span>
       <img src={picture} alt="freelance" />
-      <span>{title}</span>
+      <span data-testid="name">
+        {isFavorite ? `${star} ${title} ${star}` : title}
+      </span>
     </CardWrapper>
   )
 }
