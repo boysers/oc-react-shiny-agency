@@ -26,7 +26,6 @@ export function useFetch<D = unknown>(url: string) {
       } catch (err) {
         if (err instanceof Error) {
           setIsError(err.message)
-          console.error('API ERROR:', err.message)
         } else {
           setIsError('API ERROR')
         }
