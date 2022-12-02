@@ -105,7 +105,7 @@ export const Results: React.FC = () => {
 
   return isLoading ? (
     <LoaderWrapper>
-      <Loader />
+      <Loader data-testid="loader" />
     </LoaderWrapper>
   ) : (
     <ResultsContainer theme={theme}>
@@ -127,7 +127,7 @@ export const Results: React.FC = () => {
         )}
       </ResultsTitle>
       {resultsData.length < 1 ? null : (
-        <StyledLink $isFullLink to="/freelances">
+        <StyledLink $isFullLink to="/freelances" data-testid="button-profils">
           Découvrez nos profils
         </StyledLink>
       )}
@@ -143,8 +143,10 @@ export const Results: React.FC = () => {
               theme={theme}
               key={`result-detail-${index}-${result.title}`}
             >
-              <JobTitle theme={theme}>{result.title}</JobTitle>
-              <p>{result.description}</p>
+              <JobTitle theme={theme} data-testid="job-title">
+                {result.title}
+              </JobTitle>
+              <p data-testid="job-description">{result.description}</p>
             </JobDescription>
           ))
         )}
