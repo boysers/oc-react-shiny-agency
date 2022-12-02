@@ -16,13 +16,17 @@ const FreelancesWrapper = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin: 30px 0;
 `
 
 const StyledTitle = styled.div`
   text-align: center;
-  margin: 20px 0;
   color: ${({ theme }) => (theme === Theme.LIGHT ? '#000000' : '#ffffff')};
+  margin: 20px 0;
+
+  h1,
+  p {
+    margin: 40px 0;
+  }
 
   p {
     color: ${({ theme }) =>
@@ -37,7 +41,11 @@ const CardsContainer = styled.div`
 `
 
 export const Freelances: React.FC = () => {
-  const { data, isError, isLoading } = useFetch<{
+  const {
+    data,
+    isError: error,
+    isLoading
+  } = useFetch<{
     freelancersList: IFreelance[]
   }>('http://localhost:8000/freelances')
 
@@ -45,20 +53,26 @@ export const Freelances: React.FC = () => {
 
   const { theme } = useThemeContext()
 
+  // if (error) return <p>Il semblerait qu’il y ait un problème</p>
+
+  if (error) return <p data-testid="error">{error}</p>
+
   return (
     <FreelancesWrapper>
       <StyledTitle theme={theme}>
-        <h1>Trouvez votre prestataire</h1>
         <p>Chez Shiny nous réunissons les meilleurs profils pour vous.</p>
+        <h1>Trouvez votre prestataire</h1>
       </StyledTitle>
       {isLoading ? (
-        <Loader />
-      ) : isError ? (
-        <p>Il semblerait qu’il y ait un problème</p>
+        <Loader data-testid="loader" />
       ) : (
         <CardsContainer>
           {freelances.map((profile) => (
-            <Card {...profile} jobTitle={profile.job} key={profile.id} />
+            <Card
+              {...profile}
+              jobTitle={profile.job}
+              key={`${profile.id}-${profile.name}`}
+            />
           ))}
         </CardsContainer>
       )}

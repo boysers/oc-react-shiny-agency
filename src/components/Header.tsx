@@ -1,8 +1,8 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import logoDark from '@/assets/logo_dark.png'
-import logoLight from '@/assets/logo_light.png'
+import darkLogo from '@/assets/dark-logo.png'
+import lightLogo from '@/assets/light-logo.png'
 import { LinkComponent } from './LinkComponent'
 import { Theme, useThemeContext } from '@/contexts'
 
@@ -34,7 +34,7 @@ export const Header: React.FC = () => {
   return (
     <HeaderWrapper>
       <Logo
-        src={theme === Theme.DARK ? logoLight : logoDark}
+        src={theme === Theme.DARK ? lightLogo : darkLogo}
         alt="title"
         onClick={() => navigate('/')}
       />

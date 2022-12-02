@@ -8,7 +8,10 @@ const FooterContainer = styled.footer`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding-top: 60px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
 `
 
 const NightModeButton = styled.button`

@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import empty from '@/assets/empty.svg'
 import { Theme, useSurveyContext, useThemeContext } from '@/contexts'
 import { useFetch } from '@/hooks'
 import { colors, Loader, StyledLink } from '@/utils/style'
@@ -55,6 +56,7 @@ const JobDescription = styled.div`
 const LoaderWrapper = styled.div`
   display: flex;
   justify-content: center;
+  margin: 30px 0;
 `
 
 const StyledError = styled.p`
@@ -131,7 +133,10 @@ export const Results: React.FC = () => {
       )}
       <DescriptionWrapper theme={theme}>
         {resultsData.length < 1 ? (
-          <p>Il semblerait que vous n’ayez besoin d’aucune compétence</p>
+          <>
+            <img src={empty} alt="empty" />
+            <p>Il semblerait que vous n’ayez besoin d’aucune compétence</p>
+          </>
         ) : (
           resultsData.map((result, index) => (
             <JobDescription

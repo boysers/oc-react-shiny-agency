@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import DefaultPicture from '@/assets/profile.png'
+import defaultPicture from '@/assets/profile.png'
 import styled from 'styled-components'
 import { colors } from '@/utils/style'
 import { Theme, useThemeContext } from '@/contexts'
@@ -24,8 +24,8 @@ const CardWrapper = styled.div`
   }
 
   img {
-    height: 150px;
-    width: 150px;
+    height: 130px;
+    width: 130px;
     border-radius: 50%;
     margin: auto;
   }
@@ -41,7 +41,7 @@ const CardWrapper = styled.div`
   span:last-child {
     text-align: center;
     font-size: 1.4rem;
-    padding-bottom: 16px;
+    /* padding-bottom: 16px; */
     color: ${({ theme }) => (theme === 'light' ? '#000000' : '#ffffff')};
   }
 `
@@ -49,7 +49,7 @@ const CardWrapper = styled.div`
 export const Card: React.FC<CardType> = ({
   jobTitle: label,
   name: title,
-  picture = DefaultPicture
+  picture = defaultPicture
 }) => {
   const { theme } = useThemeContext()
   const [isFavorite, setIsFavorite] = useState(false)
@@ -64,7 +64,16 @@ export const Card: React.FC<CardType> = ({
       }}
     >
       <span data-testid="jobTitle">{label}</span>
-      <img src={picture} alt="freelance" />
+      <div
+        style={{
+          flex: 2,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+      >
+        <img src={picture} alt="freelance" />
+      </div>
       <span data-testid="name">
         {isFavorite ? `${star} ${title} ${star}` : title}
       </span>

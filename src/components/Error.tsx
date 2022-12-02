@@ -8,11 +8,12 @@ const ErrorWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 30px;
+  margin: 30px auto;
   background-color: ${({ theme }) =>
     theme === 'light' ? colors.backgroundLight : colors.backgroundDark};
   padding: 24px 0;
   border-radius: 18px;
+  width: 90%;
 
   h1,
   p {
@@ -41,7 +42,7 @@ export const Error: React.FC = () => {
     <ErrorWrapper theme={theme}>
       <h1>Oups...</h1>
       <img src={image404} alt="404" />
-      <p>Il semblerait qu’il y ait un problème</p>
+      <p>Il semblerait que la page que vous cherchez n’existe pas</p>
     </ErrorWrapper>
   )
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { LinkComponent } from '@/components'
-import illustration from '@/assets/illustration.png'
+import homeIllustration from '@/assets/home-illustration.svg'
 import styled from 'styled-components'
 import { colors } from '@/utils/style'
 import { Theme, useThemeContext } from '@/contexts'
@@ -17,7 +17,7 @@ const StyledHeader = styled.div`
   align-items: center;
   padding: 50px;
   border-radius: 18px;
-  height: 500px;
+  height: 600px;
 
   h1 {
     line-height: 2em;
@@ -58,7 +58,7 @@ export const Home: React.FC = () => {
             Faire le test
           </LinkComponent>
         </div>
-        <img src={illustration} alt="illustration" />
+        <img src={homeIllustration} alt="illustration" />
       </StyledHeader>
     </HomeWrapper>
   )

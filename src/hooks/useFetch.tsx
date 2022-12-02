@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 export function useFetch<D = unknown>(url: string) {
   const [isLoading, setIsLoading] = useState(true)
   const [data, setData] = useState<D | null>(null)
-  const [isError, setIsError] = useState<boolean>(false)
+  const [error, setIsError] = useState<string | null>(null)
 
   useEffect(() => {
     if (!url) return
@@ -16,13 +16,20 @@ export function useFetch<D = unknown>(url: string) {
           signal: controller.signal
         })
 
-        const data = await response.json()
-
-        setData(data)
+        if (!response.ok) {
+          const { errorMessage } = await response.json()
+          throw new Error(errorMessage)
+        } else {
+          const data = await response.json()
+          setData(data)
+        }
       } catch (err) {
-        setIsError(true)
-
-        if (err instanceof Error) console.error(err.message)
+        if (err instanceof Error) {
+          setIsError(err.message)
+          console.error('API ERROR:', err.message)
+        } else {
+          setIsError('API ERROR')
+        }
       } finally {
         setIsLoading(false)
       }
@@ -35,5 +42,5 @@ export function useFetch<D = unknown>(url: string) {
     }
   }, [url])
 
-  return { isLoading, data, isError } as const
+  return { isLoading, data, isError: error } as const
 }

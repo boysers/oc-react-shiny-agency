@@ -1,7 +1,6 @@
-import { render, screen } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom'
+import { screen } from '@testing-library/react'
 import { Home, sum } from './Home'
-import { ThemeProvider } from '@/contexts'
+import { render } from '@/utils/test-utils'
 
 describe('The home component', () => {
   test('Ma fonction sum', () => {
@@ -10,13 +9,7 @@ describe('The home component', () => {
   })
 
   it('should render title', () => {
-    render(
-      <MemoryRouter>
-        <ThemeProvider>
-          <Home />
-        </ThemeProvider>
-      </MemoryRouter>
-    )
+    render(<Home />)
 
     // screen.debug()
 
