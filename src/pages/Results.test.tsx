@@ -1,6 +1,5 @@
 import { server } from '@/mocks/server'
-import { render } from '@/utils/test-utils'
-import { screen, waitForElementToBeRemoved } from '@testing-library/react'
+import { render, screen, waitForElementToBeRemoved } from '@/utils/test'
 import { rest } from 'msw'
 import { formatJobList, formatQueryParams, Results } from './Results'
 

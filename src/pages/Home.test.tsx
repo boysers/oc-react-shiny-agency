@@ -1,6 +1,5 @@
-import { screen } from '@testing-library/react'
 import { Home, sum } from './Home'
-import { render } from '@/utils/test-utils'
+import { render, screen } from '@/utils/test'
 
 describe('The home component', () => {
   test('Ma fonction sum', () => {

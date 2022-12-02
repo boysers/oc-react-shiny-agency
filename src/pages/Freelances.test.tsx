@@ -1,11 +1,11 @@
-import {
-  waitFor,
-  screen,
-  waitForElementToBeRemoved
-} from '@testing-library/react'
-import { Freelances } from './Freelances'
-import { render } from '@/utils/test-utils'
 import { rest } from 'msw'
+import {
+  render,
+  screen,
+  waitFor,
+  waitForElementToBeRemoved
+} from '@/utils/test'
+import { Freelances } from './Freelances'
 import { server } from '@/mocks/server'
 
 describe('The freelances component', () => {

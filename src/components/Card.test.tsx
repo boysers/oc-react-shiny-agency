@@ -1,6 +1,5 @@
-import { fireEvent, screen } from '@testing-library/react'
 import { Card } from './Card'
-import { render } from '@/utils/test-utils'
+import { render, screen, fireEvent } from '@/utils/test'
 
 describe('The card component', () => {
   it('should render image and name', () => {

@@ -17,3 +17,10 @@ const customRender = (ui: React.ReactElement, options?: MemoryRouterProps) => {
 }
 
 export { customRender as render }
+
+export {
+  screen,
+  fireEvent,
+  waitFor,
+  waitForElementToBeRemoved
+} from '@testing-library/react'
