@@ -1,4 +1,4 @@
-# OC React Shiny Agency
+# React Shiny Agency
 
 ### `npm run dev`
 

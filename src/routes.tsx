@@ -1,9 +1,7 @@
 import { Navigate, RouteObject } from 'react-router-dom'
 import { App } from './App'
 import { Error } from './components'
-import { Home, Results } from './pages'
-import { Freelances } from './pages/Freelances'
-import { Survey } from './pages/Survey'
+import { Home, Results, Survey, Freelances } from './pages'
 
 export const routes: RouteObject[] = [
   {
