@@ -4,6 +4,7 @@ import { Card } from '@/components'
 import { colors, Loader } from '@/utils/style'
 import { Theme, useThemeContext } from '@/contexts'
 import { useFetch } from '@/hooks'
+import { Link } from 'react-router-dom'
 
 interface IFreelance {
   id: string
@@ -68,11 +69,17 @@ export const Freelances: React.FC = () => {
       ) : (
         <CardsContainer>
           {freelances.map((profile) => (
-            <Card
-              {...profile}
-              jobTitle={profile.job}
-              key={`${profile.id}-${profile.name}`}
-            />
+            <Link
+              key={`freelance-${profile.id}`}
+              to={`/profile/${profile.id}`}
+              style={{ textDecoration: 'none' }}
+            >
+              <Card
+                {...profile}
+                jobTitle={profile.job}
+                key={`${profile.id}-${profile.name}`}
+              />
+            </Link>
           ))}
         </CardsContainer>
       )}

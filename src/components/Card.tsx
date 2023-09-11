@@ -106,9 +106,9 @@ export class Card extends Component<CardType, CardState> {
       <CardWrapper
         data-testid="card"
         // theme={theme}
-        onClick={() => {
-          this.setIsFavorite()
-        }}
+        // onClick={() => {
+        //   this.setIsFavorite()
+        // }}
       >
         <span data-testid="jobTitle">{label}</span>
         <div

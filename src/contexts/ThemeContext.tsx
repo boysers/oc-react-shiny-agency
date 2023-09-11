@@ -16,7 +16,7 @@ type ThemeContextDefaultValue = {
   toggleSwitchTheme: () => void
 }
 
-const ThemeContext = createContext<ThemeContextDefaultValue | null>(null)
+export const ThemeContext = createContext<ThemeContextDefaultValue | null>(null)
 
 export const ThemeProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [theme, setTheme] = useState(Theme.DARK)

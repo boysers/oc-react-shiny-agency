@@ -1,4 +1,7 @@
-import React from 'react'
+/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+// eslint-disable-next-line prettier/prettier
+import {useState, Component } from 'react'
 import { LinkComponent } from '@/components'
 import homeIllustration from '@/assets/home-illustration.svg'
 import styled from 'styled-components'
@@ -45,11 +48,19 @@ export function sum(a: number, b: number): number {
 
 export const Home: React.FC = () => {
   const { theme } = useThemeContext()
+  // const [display, setDisplay] = useState(true)
 
   return (
     <HomeWrapper>
       <StyledHeader theme={theme}>
         <div>
+          {/* {display && <MyComponent />}
+          <button
+            onClick={() => setDisplay((prev) => !prev)}
+            style={{ width: '100%' }}
+          >
+            {display ? 'Cacher' : 'Afficher'} mon composant
+          </button> */}
           <h1>
             Repérez vos besoins, on s’occupe du reste, avec les meilleurs
             talents
@@ -62,4 +73,32 @@ export const Home: React.FC = () => {
       </StyledHeader>
     </HomeWrapper>
   )
+}
+
+class MyComponent extends Component {
+  componentDidMount(): void {
+    console.log('=== componentDidMount ===') // Après le premier rendu
+    this.setState({ test: '' })
+  }
+
+  componentDidUpdate(
+    prevProps: Readonly<{}>,
+    prevState: Readonly<{}>,
+    snapshot?: any
+  ): void {
+    console.log('=== componentDidUpdate ===') // Après une mis à jour du state ou props
+  }
+
+  componentWillUnmount(): void {
+    console.log('=== componentWillUnmount ===') // Intervient quznd le composant est retiré du DOM
+  }
+
+  render(): React.ReactNode {
+    console.log('=== RENDER ===')
+    return (
+      <div style={{ backgroundColor: 'red', textAlign: 'center' }}>
+        <p>Mon composant !</p>
+      </div>
+    )
+  }
 }

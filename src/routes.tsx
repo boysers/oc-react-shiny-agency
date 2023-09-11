@@ -2,6 +2,7 @@ import { Navigate, RouteObject } from 'react-router-dom'
 import { App } from './App'
 import { Error } from './components'
 import { Home, Results, Survey, Freelances } from './pages'
+import { ProfileContainer } from './pages/Profile'
 
 export const routes: RouteObject[] = [
   {
@@ -27,6 +28,14 @@ export const routes: RouteObject[] = [
       {
         path: 'freelances',
         element: <Freelances />
+      },
+      {
+        path: 'profile',
+        element: <Navigate to="/freelances" replace />
+      },
+      {
+        path: 'profile/:id',
+        element: <ProfileContainer />
       },
       {
         path: '404',
