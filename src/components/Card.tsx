@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
-import defaultPicture from '@/assets/profile.png'
+import React, { Component } from 'react'
 import styled from 'styled-components'
 import { colors } from '@/utils/style'
-import { Theme, useThemeContext } from '@/contexts'
+import { Theme } from '@/contexts'
 
 type CardType = { jobTitle: string; name: string; picture?: string }
+
+type CardState = { isFavorite: boolean }
 
 const CardWrapper = styled.div`
   display: flex;
@@ -46,37 +47,84 @@ const CardWrapper = styled.div`
   }
 `
 
-export const Card: React.FC<CardType> = ({
-  jobTitle: label,
-  name: title,
-  picture = defaultPicture
-}) => {
-  const { theme } = useThemeContext()
-  const [isFavorite, setIsFavorite] = useState(false)
-  const star = isFavorite ? '⭐️' : ''
+// export const Card: React.FC<CardType> = ({
+//   jobTitle: label,
+//   name: title,
+//   picture = defaultPicture
+// }) => {
+//   const { theme } = useThemeContext()
+//   const [isFavorite, setIsFavorite] = useState(false)
+//   const star = isFavorite ? '⭐️' : ''
 
-  return (
-    <CardWrapper
-      data-testid="card"
-      theme={theme}
-      onClick={() => {
-        setIsFavorite((prev) => !prev)
-      }}
-    >
-      <span data-testid="jobTitle">{label}</span>
-      <div
-        style={{
-          flex: 2,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center'
+//   return (
+//     <CardWrapper
+//       data-testid="card"
+//       theme={theme}
+//       onClick={() => {
+//         setIsFavorite((prev) => !prev)
+//       }}
+//     >
+//       <span data-testid="jobTitle">{label}</span>
+//       <div
+//         style={{
+//           flex: 2,
+//           display: 'flex',
+//           justifyContent: 'center',
+//           alignItems: 'center'
+//         }}
+//       >
+//         <img src={picture} alt="freelance" />
+//       </div>
+//       <span data-testid="name">
+//         {isFavorite ? `${star} ${title} ${star}` : title}
+//       </span>
+//     </CardWrapper>
+//   )
+// }
+
+export class Card extends Component<CardType, CardState> {
+  constructor(props: CardType) {
+    super(props)
+    this.state = {
+      isFavorite: false
+    }
+  }
+
+  setIsFavorite = () => {
+    const prev = this.state.isFavorite
+    this.setState({ isFavorite: !prev })
+  }
+
+  render(): React.ReactNode {
+    const { jobTitle: label, picture, name: title } = this.props
+
+    const { isFavorite } = this.state
+
+    const star = isFavorite ? '⭐️' : ''
+
+    return (
+      <CardWrapper
+        data-testid="card"
+        // theme={theme}
+        onClick={() => {
+          this.setIsFavorite()
         }}
       >
-        <img src={picture} alt="freelance" />
-      </div>
-      <span data-testid="name">
-        {isFavorite ? `${star} ${title} ${star}` : title}
-      </span>
-    </CardWrapper>
-  )
+        <span data-testid="jobTitle">{label}</span>
+        <div
+          style={{
+            flex: 2,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <img src={picture} alt="freelance" />
+        </div>
+        <span data-testid="name">
+          {this.state.isFavorite ? `${star} ${title} ${star}` : title}
+        </span>
+      </CardWrapper>
+    )
+  }
 }

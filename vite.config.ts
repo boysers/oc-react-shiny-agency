@@ -18,6 +18,11 @@ export default defineConfig({
     tsconfigPaths(),
     eslint()
   ],
+  server: {
+    watch: {
+      usePolling: true
+    }
+  },
   test: {
     globals: true,
     environment: 'jsdom',
